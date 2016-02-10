@@ -1,6 +1,10 @@
 module SipgateIo
   class Call
-    attr_reader :to, :from, :direction, :event, :call_id, :users
+    include ActiveModel::Validations
+
+    attr_reader :to, :from, :direction, :event, :call_id, :users, :diversion
+
+    validates :to, presence: true
 
     def initialize(params)
       @to = params[:to]
@@ -9,19 +13,14 @@ module SipgateIo
       @event = params[:event]
       @call_id = params[:callId]
       @users = params[:user]
+      @diversion = params[:diversion] unless params[:diversion].blank?
     end
 
-  #   private
-  #
-  #   attr_reader :params
-  #
-  #   def config
-  #     @config ||= Griddler.configuration
-  #   end
-  #
-  #   def recipients(type)
-  #     params[type].to_a.map { |recipient| extract_address(recipient) }
-  #   end
+    private
+
+    def valid_number(number)
+      return true if "492111234567" =~ /^\+?[1-9]\d{1,14}$|^anonymous$/
+    end
   #
   #   def extract_address(address)
   #     EmailParser.parse_address(clean_text(address))

@@ -7,9 +7,13 @@ module SipgateIo
       puts "#" * 40
       puts "processing..."
       puts "Debug:"
-      puts new_call.inspect
+      puts "Valid? #{new_call.valid?}"
       puts "#" * 40
-      head :ok
+      if new_call.valid?
+        head :ok
+      else
+        head 500
+      end
     end
   end
 end
