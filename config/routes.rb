@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  post 'event' => 'sipgate_io/event#handle'
+  post 'event_processor' => 'sipgate_io/events#create'
 end

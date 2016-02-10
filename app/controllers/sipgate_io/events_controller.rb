@@ -1,8 +1,8 @@
 module SipgateIo
-  class EventController < ApplicationController
+  class EventsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
-    def handle
+    def create
       event_type = params[:event]
       case event_type
       when "newCall"
