@@ -1,5 +1,5 @@
 module SipgateIo
-  class EventsController < ApplicationController
+  class EventsController < ActionController::Base
     skip_before_action :verify_authenticity_token
 
     def create
@@ -16,11 +16,24 @@ module SipgateIo
       else
         head 500
       end
+      process_event event
       puts "#" * 40
       puts "Debug: #{event.inspect}"
       # puts "Valid? #{new_call.valid?}"
       puts "#" * 40
       head :ok
+    end
+
+    private
+
+    delegate :processor_class, :processor_method, to: :sipgate_io_configuration
+
+    def process_event(event)
+      processor_class.new(event).public_send(processor_method)
+    end
+
+    def sipgate_io_configuration
+      SipgateIo.configuration
     end
   end
 end
