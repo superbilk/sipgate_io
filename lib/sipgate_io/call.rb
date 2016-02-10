@@ -1,10 +1,6 @@
 module SipgateIo
   class Call
-    include ActiveModel::Validations
-
     attr_reader :to, :from, :direction, :event, :call_id, :users, :diversion
-
-    validates :to, presence: true
 
     def initialize(params)
       @to = params[:to]
