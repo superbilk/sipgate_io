@@ -40,7 +40,7 @@ module SipgateIo
     private
 
     def valid_number(number)
-      return true if "492111234567" =~ /^\+?[1-9]\d{1,14}$|^anonymous$/
+      return true if number =~ /^\+?[1-9]\d{1,14}$|^anonymous$/
     end
   end
 
