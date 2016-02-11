@@ -47,6 +47,7 @@ Defaults are shown below with sample overrides following. In
 SipgateIo.configure do |config|
   config.processor_class = EventProcessor # CountMyCalls
   config.processor_method = :process # :add_call (A method on CountMyCalls)
+  config.callback_url = "https://example.org/sipgate_io/events/create"
 end
 ```
 
@@ -54,7 +55,7 @@ end
 | ------             | -------
 | `processor_class`  | The class sipgate.io will use to handle your incoming events.
 | `processor_method` | The method sipgate.io will call on the processor class when handling your incoming events.
-| `callback_url`     | Used for DTMF. This must be your full qualified URL like https://mydomain.com/sipgate_io/events/create
+| `callback_url`     | Used for DTMF, on_answer and on_hangup.
 
 By default sipgate.io will look for a class named `EventProcessor`. The class is
 initialized with a event object representing the event, and has a `process` method to actually process the event.

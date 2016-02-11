@@ -38,15 +38,6 @@ module SipgateIo
       end
     end
 
-    # <?xml version="1.0" encoding="UTF-8"?>
-    # <Response>
-    #     <Gather onData="http://localhost:3000/dtmf" maxDigits="3" timeout="10000">
-    #         <Play>
-    #             <Url>https://example.com/example.wav</Url>
-    #         </Play>
-    #     </Gather>
-    # </Response>
-
     def self.reject(reason = nil)
       self.builder.response do |b|
         if reason.nil?
@@ -59,6 +50,14 @@ module SipgateIo
 
     def self.hangup
       self.builder.response { |b| b.hangup }
+    end
+
+    def self.on_answer
+      self.builder.response(onAnswer: SipgateIo.configuration.callback_url)
+    end
+
+    def self.on_hangup
+      self.builder.response(onHangup: SipgateIo.configuration.callback_url)
     end
 
     private
