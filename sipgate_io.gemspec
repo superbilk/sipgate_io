@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Use sipgate.io with Rails}
   s.license     = "MIT"
 
-  spec.required_ruby_version = ['>= 2.2.0']
+  s.required_ruby_version = ['>= 2.2.0']
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
