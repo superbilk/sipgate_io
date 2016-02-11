@@ -1,12 +1,14 @@
-= SipgateIo
+# SipgateIo
 
 This project rocks and uses MIT-LICENSE.
 
-sipgate.io is sipgate's new Push-API. With sipgate.io booked, we send you call meta data every time someone calls. And when someone picks up. And when someone hangs up. 
+## sipgate says:
 
-### Receive realtime call meta data in your Rails app
+> sipgate.io is sipgate's new Push-API. With sipgate.io booked, we send you call meta data every time someone calls. And when someone picks up. And when someone hangs up.
 
-This gem is a Rails engine that provides an endpoint for sipgate.io that parses these API POSTs and hands off a
+## Receive realtime call meta data in your Rails app
+
+This gem is a Rails engine that provides an endpoint for sipgate.io that parses these Push-API POSTs and hands off a
 built event object to a class implemented by you.
 
 Tutorials
@@ -19,29 +21,25 @@ Installation
 
 1. Add `sipgate_io` gem to your application's Gemfile
    and run `bundle install`.
+   
+   This gem is not on RubyGems yet, so please use
+   `gem 'sipgate_io', :git => 'git://github.com/superbilk/sipgate_io.git'`
 
 2. A route is needed for the endpoint which receives `POST` messages. To add the
-   route, in `config/routes.rb` you may either use the provided routing method
-   `mount_griddler` or set the route explicitly. Examples:
+   route, in `config/routes.rb`please mount the route explicitly. Example:
 
    ```ruby
    # config/routes.rb
 
-   # mount using default path: /email_processor
-   mount_griddler
-
-   # mount using a custom path
-   mount_griddler('/email/incoming')
-
-   # the DIY approach:
-   post '/email_processor' => 'griddler/emails#create'
+   # the full route will be '/sipgate_io/events/create'
+   mount SipgateIo::Engine => "/sipgate_io"
    ```
 
 ### Configuration Options
 
-An initializer can be created to control some of the options in sipgate.io.
+An initializer can be created to control some of the options in sipgate_io.
 Defaults are shown below with sample overrides following. In
-`config/initializers/sipgate.io.rb`:
+`config/initializers/sipgate_io.rb`:
 
 ```ruby
 SipgateIo.configure do |config|
@@ -56,7 +54,7 @@ end
 | `processor_method` | The method sipgate.io will call on the processor class when handling your incoming events.
 
 By default sipgate.io will look for a class named `EventProcessor`. The class is
-initialized with a `SipgateIo::Event` instance representing the event, and has a `process` method to actually process the event.
+initialized with a event object representing the event, and has a `process` method to actually process the event.
 For example, in `./lib/event_processor.rb`:
 
 ```ruby
@@ -68,91 +66,22 @@ class EventProcessor
   def process
     # all of your application-specific code here - creating models,
     # processing reports, etc
-
-    # here's an example of model creation
-    user = User.find_by_email(@email.from[:email])
-    user.posts.create!(
-      subject: @email.subject,
-      body: @email.body
-    )
   end
 end
 ```
 
-Griddler::Email attributes
---------------------------
+Keep in mind, that Rails does NOT autloload files in `lib`. You can conveniently put tis file in `controllers` or `models` - there it is autoloaded.
 
-| Attribute      | Description
-| -------------- | -----------
-| `#to`          | An array of hashes containing recipient address information.  See [Email Addresses](#email-addresses) for more information.
-| `#from`        | A hash containing the sender address information.
-| `#cc`          | An array of hashes containing cc email address information.
-| `#subject`     | The subject of the email message.
-| `#body`        | The full contents of the email body **unless** there is a line in the email containing the string `-- REPLY ABOVE THIS LINE --`. In that case `.body` will contain everything before that line.
-| `#raw_text`    | The raw text part of the body.
-| `#raw_html`    | The raw html part of the body.
-| `#raw_body`    | The raw body information provided by the email service.
-| `#attachments` | An array of `File` objects containing any attachments.
-| `#headers`     | A hash of headers parsed by `Mail::Header`, unless they are already formatted as a hash when received from the adapter in which case the original hash is returned.
-| `#raw_headers` | The raw headers included in the message.
 
-### Email Addresses
-
-Gridder::Email provides email addresses as hashes. Each hash will have the following
-information of each recipient:
-
-| Key | Value
-| --- | -----
-| `:token` | All the text before the email's "@". We've found that this is the most often used portion of the email address and consider it to be the token we'll key off of for interaction with our application.
-| `:host` | All the text after the email's "@". This is important to filter the recipients sent to the application vs emails to other domains. More info below on the Upgrading to 0.5.0 section.
-| `:email` | The email address of the recipient.
-| `:full` | The whole recipient field (e.g., `Some User <hello@example.com>`).
-| `:name` | The name of the recipient (e.g., `Some User`).
 
 Testing In Your App
 -------------------
 
-You may want to create a factory for when testing the integration of Griddler
-into your application. If you're using factory\_girl this can be accomplished
-with the following sample factory:
-
-```ruby
-factory :email, class: OpenStruct do
-  # Assumes Griddler.configure.to is :hash (default)
-  to [{ full: 'to_user@email.com', email: 'to_user@email.com', token: 'to_user', host: 'email.com', name: nil }]
-  from({ token: 'from_user', host: 'email.com', email: 'from_email@email.com', full: 'From User <from_user@email.com>', name: 'From User' })
-  subject 'email subject'
-  body 'Hello!'
-  attachments {[]}
-
-  trait :with_attachment do
-    attachments {[
-      ActionDispatch::Http::UploadedFile.new({
-        filename: 'img.png',
-        type: 'image/png',
-        tempfile: File.new("#{File.expand_path(File.dirname(__FILE__))}/fixtures/img.png")
-      })
-    ]}
-  end
-end
-```
-
-Bear in mind, if you plan on using the `:with_attachment` trait, that this
-example assumes your factories are in `spec/factories.rb` and you have
-an image file in `spec/fixtures/`.
-
-To use it in your tests, build with `email = build(:email)`
-or `email = build(:email, :with_attachment)`.
-
+* tba
 
 
 Credits
 -------
 
-Griddler was written by Caleb Thompson and Joel Oliveira.
-
-Thanks to our [contributors](https://github.com/thoughtbot/griddler/contributors)!
-
-![thoughtbot](http://thoughtbot.com/images/tm/logo.png)
-
-The names and logos for thoughtbot are trademarks of thoughtbot, inc.
+Most of the code is copied fom Griddler by Caleb Thompson and Joel Oliveira / thoughtbot.
+You find the code [here](https://github.com/thoughtbot/griddler)
