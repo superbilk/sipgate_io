@@ -2,7 +2,7 @@
 
 This project rocks and uses MIT-LICENSE.
 
-## sipgate says:
+### sipgate says:
 
 > sipgate.io is sipgate's new Push-API. With sipgate.io booked, we send you call meta data every time someone calls. And when someone picks up. And when someone hangs up.
 
@@ -11,13 +11,11 @@ This project rocks and uses MIT-LICENSE.
 This gem is a Rails engine that provides an endpoint for sipgate.io that parses these Push-API POSTs and hands off a
 built event object to a class implemented by you.
 
-Tutorials
----------
+## Tutorials
 
 * tba
 
-Installation
-------------
+## Installation
 
 1. Add `sipgate_io` gem to your application's Gemfile
    and run `bundle install`.
@@ -35,7 +33,7 @@ Installation
    mount SipgateIo::Engine => "/sipgate_io"
    ```
 
-### Configuration Options
+## Configuration Options
 
 An initializer can be created to control some of the options in sipgate_io.
 Defaults are shown below with sample overrides following. In
@@ -74,14 +72,12 @@ Keep in mind, that Rails does NOT autloload files in `lib`. You can conveniently
 
 
 
-Testing In Your App
--------------------
+## Testing In Your App
 
 * tba
 
 
-Credits
--------
+## Credits
 
 Most of the code is copied fom Griddler by Caleb Thompson and Joel Oliveira / thoughtbot.
 You find the code [here](https://github.com/thoughtbot/griddler)
