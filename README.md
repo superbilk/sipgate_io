@@ -21,6 +21,21 @@ You need an account and phonenumber with sipgate. A free sipgate basic account i
 * [x] [Book the sipgate.io feature](https://www.sipgate.de/go/feature-store/sipgate.io)
 * [x] [Enter an URL for incoming/outgoing calls in the dashboard](https://www.sipgate.de/go/dashboard)
 
+### Have a working example in 5 Minutes
+
+There is a fully working example app included in this gem.
+
+* Have your sipgate account ready (you can create one in a minute, see above)
+* You need [ngrok](https://ngrok.com/) to receive a POST from sipgate on your locale machine
+* Clone this gem `git clone https://github.com/superbilk/sipgate_io.git` and cd into it `cd sipgate_io`
+* Go to app root `cd test/dummy`
+* Make sure all gems are installed `bundle install`
+* Start rails app `rails s`
+* Start ngrok in another terminal `ngrok http 3000` you get a secure forwarding URL like `https://999b1wa06.ngrok.io`
+* Add your forwarding URL to your sipgate account, don't forget to add `/sipgate_io/events/create` (`https://999b1wa06.ngrok.io/sipgate_io/events/create`). Use the same URL for incoming & outgoing calls
+* Make a phonecall and you will see the call in realtime in your console (the one with the rails server running)
+* Change what happens with the call here `test/dummy/app/models/event_processor.rb` (Link)[https://github.com/superbilk/sipgate_io/blob/master/test/dummy/app/models/event_processor.rb]
+
 ## Installation
 
 1. Add `sipgate_io` gem to your application's Gemfile
