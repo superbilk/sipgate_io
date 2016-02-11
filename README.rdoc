@@ -1,5 +1,6 @@
-sipgate.io
-========
+= SipgateIo
+
+This project rocks and uses MIT-LICENSE.
 
 sipgate.io is sipgate's new Push-API. With sipgate.io booked, we send you call meta data every time someone calls. And when someone picks up. And when someone hangs up. 
 

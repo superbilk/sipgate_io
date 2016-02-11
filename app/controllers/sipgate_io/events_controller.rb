@@ -1,5 +1,7 @@
+require_dependency "sipgate_io/application_controller"
+
 module SipgateIo
-  class EventsController < ActionController::Base
+  class EventsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def create
@@ -14,7 +16,7 @@ module SipgateIo
       when "dtmf"
         event = Dtmf.new(params)
       else
-        head 500
+        head 500 and return
       end
       answer = process_event event
       render xml: answer
