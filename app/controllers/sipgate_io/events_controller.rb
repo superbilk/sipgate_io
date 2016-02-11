@@ -16,7 +16,7 @@ module SipgateIo
       when "dtmf"
         event = Dtmf.new(params)
       else
-        head 500
+        head 500 and return
       end
       answer = process_event event
       render xml: answer

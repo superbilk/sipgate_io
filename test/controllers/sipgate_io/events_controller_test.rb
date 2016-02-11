@@ -6,9 +6,9 @@ module SipgateIo
       @routes = Engine.routes
     end
 
-    test "should get create" do
+    test "create without params gives 500" do
       get :create
-      assert_response :success
+      assert_response :error
     end
 
   end
