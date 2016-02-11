@@ -24,7 +24,7 @@ module SipgateIo
     def self.gather(options = nil)
       options ||= {}
       options[:type] ||= :dtmf
-      options[:callback_url] ||= "http://google.de" # FIXME
+      options[:callback_url] ||= SipgateIo.configuration.callback_url
       options[:max_digits] ||= 1
       options[:timeout] ||= 1000
       self.builder.response do |b|

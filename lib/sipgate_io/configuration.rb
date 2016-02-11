@@ -16,7 +16,7 @@ module SipgateIo
   end
 
   class Configuration
-    attr_accessor :processor_class, :processor_method
+    attr_accessor :processor_class, :processor_method, :callback_url
 
     def processor_class
       @processor_class ||=
@@ -41,6 +41,10 @@ module SipgateIo
 
     def processor_method
       @processor_method ||= :process
+    end
+
+    def callback_url
+      @callback_url ||= :callback_url
     end
   end
 end
