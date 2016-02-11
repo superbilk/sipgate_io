@@ -1,4 +1,4 @@
 SipgateIo::Engine.routes.draw do
-  get 'events/create'
+  post 'events/create'
 
 end
