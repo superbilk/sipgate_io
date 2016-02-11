@@ -4,21 +4,21 @@ module SipgateIo
   class XmlResponse
 
     def self.dial(target, options = nil)
-      self.builder.response do |b|
+      self.builder.Response do |b|
         if target == :voicemail
-          b.dial { |b| b.voicemail }
+          b.Dial { |b| b.Voicemail }
         elsif options.nil?
-          b.dial { |b| b.number(target) }
+          b.Dial { |b| b.Number(target) }
         elsif !options[:anonymous].nil?
-          b.dial(anonymous: true) { |b| b.number(target) }
+          b.Dial(anonymous: true) { |b| b.Number(target) }
         elsif !options[:caller_id].nil?
-          b.dial(callerId: options[:caller_id]) { |b| b.number(target) }
+          b.Dial(callerId: options[:caller_id]) { |b| b.Number(target) }
         end
       end
     end
 
     def self.play(url)
-      self.builder.response { |b| b.play { |b| b.url(url) } }
+      self.builder.Response { |b| b.Play { |b| b.Url(url) } }
     end
 
     def self.gather(options = nil)
@@ -27,37 +27,37 @@ module SipgateIo
       options[:callback_url] ||= SipgateIo.configuration.callback_url
       options[:max_digits] ||= 1
       options[:timeout] ||= 1000
-      self.builder.response do |b|
-        b.gather(onData: options[:callback_url],
+      self.builder.Response do |b|
+        b.Gather(onData: options[:callback_url],
                  maxDigits: options[:max_digits],
                  timeout: options[:timeout]) do |b|
           unless options[:play_url].nil?
-            b.play { |b| b.url(options[:play_url]) }
+            b.Play { |b| b.Url(options[:play_url]) }
           end
         end
       end
     end
 
     def self.reject(reason = nil)
-      self.builder.response do |b|
+      self.builder.Response do |b|
         if reason.nil?
-          b.reject
+          b.Reject
         else
-          b.reject(reason: reason)
+          b.Reject(reason: reason)
         end
       end
     end
 
     def self.hangup
-      self.builder.response { |b| b.hangup }
+      self.builder.Response { |b| b.Hangup }
     end
 
     def self.on_answer
-      self.builder.response(onAnswer: SipgateIo.configuration.callback_url)
+      self.builder.Response(onAnswer: SipgateIo.configuration.callback_url)
     end
 
     def self.on_hangup
-      self.builder.response(onHangup: SipgateIo.configuration.callback_url)
+      self.builder.Response(onHangup: SipgateIo.configuration.callback_url)
     end
 
     private
