@@ -1,4 +1,4 @@
-# SipgateIo
+# gem "sipgate_io"
 
 This project rocks and uses MIT-LICENSE.
 
