@@ -16,9 +16,8 @@ module SipgateIo
       else
         head 500
       end
-      process_event event
-
-      head :ok
+      answer = process_event event
+      render xml: answer
     end
 
     private

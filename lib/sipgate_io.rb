@@ -5,6 +5,7 @@ require "sipgate_io/answer"
 require "sipgate_io/dtmf"
 require "sipgate_io/hangup"
 require "sipgate_io/configuration"
+require "sipgate_io/xml_response"
 
 module SipgateIo
   class Engine < Rails::Engine; end
