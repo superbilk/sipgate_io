@@ -34,7 +34,7 @@ There is a fully working example app included in this gem.
 * Start ngrok in another terminal `ngrok http 3000` you get a secure forwarding URL like `https://999b1wa06.ngrok.io`
 * Add your forwarding URL to your sipgate account, don't forget to add `/sipgate_io/events/create` (`https://999b1wa06.ngrok.io/sipgate_io/events/create`). Use the same URL for incoming & outgoing calls
 * Make a phonecall and you will see the call in realtime in your console (the one with the rails server running)
-* Change what happens with the call here `test/dummy/app/models/event_processor.rb` (Link)[https://github.com/superbilk/sipgate_io/blob/master/test/dummy/app/models/event_processor.rb]
+* Change what happens with the call here `test/dummy/app/models/event_processor.rb` [Link](https://github.com/superbilk/sipgate_io/blob/master/test/dummy/app/models/event_processor.rb)
 
 ## Installation
 
