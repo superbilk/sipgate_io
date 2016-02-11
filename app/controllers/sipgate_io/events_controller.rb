@@ -17,10 +17,7 @@ module SipgateIo
         head 500
       end
       process_event event
-      puts "#" * 40
-      puts "Debug: #{event.inspect}"
-      # puts "Valid? #{new_call.valid?}"
-      puts "#" * 40
+
       head :ok
     end
 
