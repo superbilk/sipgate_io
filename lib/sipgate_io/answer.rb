@@ -1,5 +1,7 @@
 module SipgateIo
   class Answer
+    include ActiveModel::Validations
+
     attr_reader :event, :call_id, :user
 
     def initialize(params)

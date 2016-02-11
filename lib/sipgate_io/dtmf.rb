@@ -1,5 +1,7 @@
 module SipgateIo
   class Dtmf
+    include ActiveModel::Validations
+
     attr_reader :event, :call_id, :dtmf
 
     def initialize(params)

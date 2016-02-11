@@ -1,5 +1,7 @@
 module SipgateIo
   class Hangup
+    include ActiveModel::Validations
+
     attr_reader :event, :call_id, :cause
 
     def initialize(params)

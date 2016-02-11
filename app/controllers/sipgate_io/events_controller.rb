@@ -18,6 +18,8 @@ module SipgateIo
       else
         head 500 and return
       end
+      (head 500 and return) if event.invalid?
+
       answer = process_event event
       render xml: answer
     end
