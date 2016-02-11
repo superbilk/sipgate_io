@@ -26,9 +26,6 @@ You need an account and phonenumber with sipgate. A free sipgate basic account i
 1. Add `sipgate_io` gem to your application's Gemfile
    and run `bundle install`.
 
-   This gem is not on RubyGems yet, so please use
-   `gem 'sipgate_io', :git => 'git://github.com/superbilk/sipgate_io.git'`
-
 2. A route is needed for the endpoint which receives `POST` messages. To add the
    route, in `config/routes.rb`please mount the route explicitly. Example:
 
