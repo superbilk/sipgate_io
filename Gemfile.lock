@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sipgate_io (0.1.0)
+    sipgate_io (0.1.1)
       rails (~> 4.2)
 
 GEM
@@ -104,6 +104,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rake (~> 10.5)
   sipgate_io!
   sqlite3 (~> 1.3)
 
