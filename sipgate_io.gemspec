@@ -11,8 +11,9 @@ Gem::Specification.new do |s|
   s.email       = ["chris@superbilk.org"]
   s.homepage    = "https://github.com/superbilk/sipgate_io"
   s.summary     = %q{Use sipgate.io with Rails}
-  s.description = %q{A Rails gem that makes it easier to use sipgate.io the Ruby way}
   s.license     = "MIT"
+
+  spec.required_ruby_version = ['>= 2.2.0']
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
