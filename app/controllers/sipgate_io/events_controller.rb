@@ -2,7 +2,7 @@ require_dependency "sipgate_io/application_controller"
 
 module SipgateIo
   class EventsController < ApplicationController
-    skip_before_action :verify_authenticity_token
+    skip_before_action :verify_authenticity_token, raise: false
 
     def create
       event_type = params[:event]
