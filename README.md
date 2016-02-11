@@ -1,4 +1,6 @@
 # gem "sipgate_io"
+[![Gem Version](https://badge.fury.io/rb/sipgate_io.svg)](https://badge.fury.io/rb/sipgate_io)
+[![Build Status](https://travis-ci.org/superbilk/sipgate_io.svg?branch=master)](https://travis-ci.org/superbilk/sipgate_io)
 
 This project rocks and uses MIT-LICENSE.
 
