@@ -1,35 +1,23 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'sipgate_io/version'
+$:.push File.expand_path("../lib", __FILE__)
 
-Gem::Specification.new do |spec|
-  spec.name          = "sipgate_io"
-  spec.version       = SipgateIo::VERSION
-  spec.authors       = ["Chris Schmidt"]
-  spec.email         = ["chris@superbilk.org"]
+# Maintain your gem's version:
+require "sipgate_io/version"
 
-  spec.summary       = %q{Use sipgate.io with Rails}
-  spec.description   = %q{A Rails gem that makes it easier to use sipgate.io the Ruby way}
-  spec.homepage      = "https://github.com/superbilk/sipgate_io"
+# Describe your gem and declare its dependencies:
+Gem::Specification.new do |s|
+  s.name        = "sipgate_io"
+  s.version     = SipgateIo::VERSION
+  s.authors     = ["Chris Schmidt"]
+  s.email       = ["chris@superbilk.org"]
+  s.homepage    = "TODO"
+  s.summary     = "TODO: Summary of SipgateIo."
+  s.description = "TODO: Description of SipgateIo."
+  s.license     = "MIT"
 
-  # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
-  # delete this section to allow pushing this gem to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  end
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.test_files = Dir["test/**/*"]
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  s.add_dependency "rails", "~> 4.2.5.1"
 
-  spec.add_dependency "rails", "~> 4.2"
-  spec.add_dependency "builder", "~> 3.2"
-
-  spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency 'minitest', "~> 5.8"
+  s.add_development_dependency "sqlite3"
 end
