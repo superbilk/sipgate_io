@@ -13,3 +13,6 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem "guard", group: :development
+gem "guard-minitest", group: :development
+gem 'growl'

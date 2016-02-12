@@ -48,8 +48,10 @@ module SipgateIo
       end
     end
 
-    def self.hangup
-      self.builder.Response { |b| b.Hangup }
+    def self.hangup(callback = nil)
+      validate_callback! callback
+
+      self.builder.Response(callback){ |b| b.Hangup }
     end
 
     def self.on_answer
@@ -61,6 +63,17 @@ module SipgateIo
     end
 
     private
+
+    def self.validate_callback!(callback)
+      unless callback.nil?
+        callback.keys.each do |k|
+          callback.delete k unless [:on_answer, :on_hangup].include? k
+        end
+        callback[:onAnswer] = callback.delete :on_answer if callback[:on_answer]
+        callback[:onHangup] = callback.delete :on_hangup if callback[:on_hangup]
+      end
+      callback
+    end
 
     def self.builder
       b = Builder::XmlMarkup.new(indent: 2)
