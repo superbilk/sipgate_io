@@ -107,22 +107,22 @@ Here are some examples:
 ```ruby
 # don't answer that call
 SipgateIo::XmlResponse.reject
-SipgateIo::XmlResponse.reject(:busy)
-SipgateIo::XmlResponse.reject(:rejected)
+SipgateIo::XmlResponse.reject(reason: :busy)
+SipgateIo::XmlResponse.reject(reason: :rejected)
 SipgateIo::XmlResponse.hangup
 
 # forward that call
-SipgateIo::XmlResponse.dial(:voicemail)
-SipgateIo::XmlResponse.dial("491234567")
-SipgateIo::XmlResponse.dial("491234567", anonymous: true)
-SipgateIo::XmlResponse.dial("491234567", caller_id: "555")
+SipgateIo::XmlResponse.dial(target: :voicemail)
+SipgateIo::XmlResponse.dial(target: "491234567", callback: :on_hangup)
+SipgateIo::XmlResponse.dial(target: "491234567", clip: :anonymous)
+SipgateIo::XmlResponse.dial(target: "491234567", clip: "555")
 
 # play an announcement
-SipgateIo::XmlResponse.play("http://some.wav")
+SipgateIo::XmlResponse.play(soundfile_url: "http://some.wav", callback: :on_answer)
 
 # wait for DTMF
 SipgateIo::XmlResponse.gather()
-SipgateIo::XmlResponse.gather(play_url: "http://some.wav")
+SipgateIo::XmlResponse.gather(soundfile_url: "http://some.wav", timeout: 5000, callback: :on_hangup)
 ```
 
 ## Testing In Your App
