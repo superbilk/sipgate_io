@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/alovak/test_xml.git
-  revision: aeeace684dcaf1a7ae421adb89d9507a4c12e195
-  specs:
-    test_xml (0.1.7)
-      diffy (~> 3.0)
-      nokogiri (>= 1.3.2)
-
 PATH
   remote: .
   specs:
@@ -54,7 +46,6 @@ GEM
     builder (3.2.2)
     coderay (1.1.0)
     concurrent-ruby (1.0.0)
-    diffy (3.1.0)
     erubis (2.7.0)
     ffi (1.9.10)
     formatador (0.2.5)
@@ -154,7 +145,6 @@ DEPENDENCIES
   rake (> 0)
   sipgate_io!
   sqlite3 (> 0)
-  test_xml!
 
 BUNDLED WITH
    1.10.6
