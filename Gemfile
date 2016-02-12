@@ -13,6 +13,9 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem "guard", group: :development
-gem "guard-minitest", group: :development
-gem 'growl'
+group :development do
+  gem "guard", group: :development
+  gem "guard-minitest", group: :development
+  gem 'guard-bundler', require: false
+  gem 'growl'
+end
