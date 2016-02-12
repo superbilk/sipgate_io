@@ -69,6 +69,9 @@ GEM
     guard-minitest (2.4.4)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    guard-rails (0.7.2)
+      guard (~> 2.11)
+      guard-compat (~> 1.0)
     i18n (0.7.0)
     json (1.8.3)
     listen (3.0.5)
@@ -147,6 +150,7 @@ DEPENDENCIES
   guard
   guard-bundler
   guard-minitest
+  guard-rails
   rake (> 0)
   sipgate_io!
   sqlite3 (> 0)
