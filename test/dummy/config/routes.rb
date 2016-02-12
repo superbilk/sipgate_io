@@ -1,4 +1,3 @@
 Rails.application.routes.draw do
-
-  mount SipgateIo::Engine => "/sipgate_io"
+  mount_sipgate_io
 end

@@ -4,6 +4,7 @@ require "sipgate_io/new_call"
 require "sipgate_io/answer"
 require "sipgate_io/dtmf"
 require "sipgate_io/hangup"
+require "sipgate_io/route_extension"
 require "sipgate_io/configuration"
 require "sipgate_io/xml_response"
 

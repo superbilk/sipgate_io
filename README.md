@@ -32,7 +32,7 @@ There is a fully working example app included in this gem.
 * Make sure all gems are installed `bundle install`
 * Start rails app `rails s`
 * Start ngrok in another terminal `ngrok http 3000` you get a secure forwarding URL like `https://999b1wa06.ngrok.io`
-* Add your forwarding URL to your sipgate account, don't forget to add `/sipgate_io/events/create` (`https://999b1wa06.ngrok.io/sipgate_io/events/create`). Use the same URL for incoming & outgoing calls
+* Add your forwarding URL to your sipgate account, don't forget to add `/sipgate_io` (`https://999b1wa06.ngrok.io/sipgate_io`). Use the same URL for incoming & outgoing calls
 * Make a phonecall and you will see the call in realtime in your console (the one with the rails server running)
 * Change what happens with the call here `test/dummy/app/models/event_processor.rb` [Link](https://github.com/superbilk/sipgate_io/blob/master/test/dummy/app/models/event_processor.rb)
 
@@ -42,13 +42,20 @@ There is a fully working example app included in this gem.
    and run `bundle install`.
 
 2. A route is needed for the endpoint which receives `POST` messages. To add the
-   route, in `config/routes.rb`please mount the route explicitly. Example:
+   route, in `config/routes.rb` you may either use the provided routing method
+   `mount_sipgate_io` or set the route explicitly. Examples:
 
    ```ruby
    # config/routes.rb
 
-   # the full route will be '/sipgate_io/events/create'
-   mount SipgateIo::Engine => "/sipgate_io"
+   # mount using default path: /sipgate_io
+   mount_sipgate_io
+
+   # mount using a custom path
+   mount_sipgate_io('/call/push')
+
+   # the DIY approach:
+   post '/call_processor' => 'sipgate_io/events#create'
    ```
 
 ### Configuration Options
@@ -61,7 +68,7 @@ Defaults are shown below with sample overrides following. In
 SipgateIo.configure do |config|
   config.processor_class = EventProcessor # CountMyCalls
   config.processor_method = :process # :add_call (A method on CountMyCalls)
-  config.callback_url = "https://example.org/sipgate_io/events/create"
+  config.callback_url = "https://example.org/sipgate_io"
 end
 ```
 

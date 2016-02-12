@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sipgate_io (0.2.0)
+    sipgate_io (0.3.0)
       rails (>= 4.2.5.1)
 
 GEM
