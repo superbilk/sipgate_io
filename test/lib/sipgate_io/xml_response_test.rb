@@ -127,13 +127,13 @@ module SipgateIo
 
     test "only on answer" do
       actual = SipgateIo::XmlResponse.on_answer
-      expected = %Q[<?xml version="1.0" encoding="UTF-8"?><Response onAnswer="http://localhost:3000"/>]
+      expected = %Q[<?xml version="1.0" encoding="UTF-8"?><Response onAnswer="http://localhost:3000"></Response>]
       assert_equal sanitize_xml_for_test(actual), expected
     end
 
     test "only on hangup" do
       actual = SipgateIo::XmlResponse.on_hangup
-      expected = %Q[<?xml version="1.0" encoding="UTF-8"?><Response onHangup="http://localhost:3000"/>]
+      expected = %Q[<?xml version="1.0" encoding="UTF-8"?><Response onHangup="http://localhost:3000"></Response>]
       assert_equal sanitize_xml_for_test(actual), expected
     end
 
