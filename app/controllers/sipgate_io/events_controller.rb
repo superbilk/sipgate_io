@@ -5,19 +5,10 @@ module SipgateIo
     skip_before_action :verify_authenticity_token, raise: false
 
     def create
-      event_type = params[:event]
-      case event_type
-      when "newCall"
-        event = NewCall.new(params)
-      when "answer"
-        event = Answer.new(params)
-      when "hangup"
-        event = Hangup.new(params)
-      when "dtmf"
-        event = Dtmf.new(params)
-      else
-        head 500 and return
-      end
+      (head 500 and return) unless params.key?(:event)
+
+      event = create_event_object(params)
+
       (head 500 and return) if event.invalid?
 
       answer = process_event event
@@ -27,6 +18,12 @@ module SipgateIo
     private
 
     delegate :processor_class, :processor_method, to: :sipgate_io_configuration
+
+    def create_event_object(params)
+      event_type = params[:event].clone
+      event_type[0] = event_type[0].upcase
+      "SipgateIo::#{event_type}".constantize.new(params)
+    end
 
     def process_event(event)
       processor_class.new(event).public_send(processor_method)
