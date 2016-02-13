@@ -22,8 +22,8 @@ module SipgateIo
 
     def self.gather(options = {})
       on_data = Hash[ onData: SipgateIo.configuration.callback_url ]
-      max_digits = options.key?(:max_digits) ? Hash[ maxDigits: options[:max_digits] ] : nil
-      timeout = options.key?(:timeout) ? Hash[ timeout: options[:timeout] ] : nil
+      max_digits = parse_option(options, :max_digits, :maxDigits)
+      timeout = parse_option(options, :timeout)
       play_url = options.key?(:soundfile_url) ? options[:soundfile_url] : nil
 
       self.builder(options) do |b|
@@ -38,7 +38,7 @@ module SipgateIo
     end
 
     def self.reject(options = {})
-      reason = options.key?(:reason) ? Hash[ reason: options[:reason] ] : nil
+      reason = parse_option(options, :reason)
 
       self.builder(options) { |b| b.Reject(reason) }
     end
@@ -56,6 +56,11 @@ module SipgateIo
     end
 
     private
+
+    def self.parse_option(options, key, xml_key_name = nil)
+      xml_key_name ||= key
+      options.key?(key) ? Hash[ xml_key_name => options[key] ] : nil
+    end
 
     def self.set_callback(options)
       return nil unless options.key?(:callback)
