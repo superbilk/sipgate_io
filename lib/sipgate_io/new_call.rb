@@ -1,6 +1,7 @@
 module SipgateIo
   class NewCall
     include ActiveModel::Validations
+    include SipgateIo::EventProcessor
 
     attr_reader :to, :from, :direction, :event, :call_id, :users, :diversion
 
@@ -18,5 +19,6 @@ module SipgateIo
       @users = params[:user]
       @diversion = params[:diversion] unless params[:diversion].blank?
     end
+
   end
 end

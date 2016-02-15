@@ -1,6 +1,7 @@
 module SipgateIo
   class Hangup
     include ActiveModel::Validations
+    include SipgateIo::EventProcessor
 
     attr_reader :event, :call_id, :cause
 

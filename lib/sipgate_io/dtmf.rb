@@ -1,6 +1,7 @@
 module SipgateIo
   class Dtmf
     include ActiveModel::Validations
+    include SipgateIo::EventProcessor
 
     attr_reader :event, :call_id, :dtmf
 

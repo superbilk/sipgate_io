@@ -1,5 +1,6 @@
 require "sipgate_io/engine"
 require "sipgate_io/version"
+require "sipgate_io/event_processor"
 require "sipgate_io/new_call"
 require "sipgate_io/answer"
 require "sipgate_io/dtmf"

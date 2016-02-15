@@ -71,8 +71,8 @@ module SipgateIo
     def self.builder(options)
       xml = Builder::XmlMarkup.new(indent: 2)
       xml.instruct!
-      xml.Response(set_callback(options)) do |res|
-        yield(res) if block_given?
+      xml.Response(set_callback(options)) do |response|
+        yield(response) if block_given?
       end
     end
   end
