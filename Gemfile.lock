@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sipgate_io (0.3.0)
+    sipgate_io (0.3.1)
       rails (>= 4.2.5.1)
 
 GEM
@@ -151,9 +151,8 @@ DEPENDENCIES
   guard-bundler
   guard-minitest
   guard-rails
-  rake (> 0)
   sipgate_io!
-  sqlite3 (> 0)
+  sqlite3 (>= 1.3)
 
 BUNDLED WITH
    1.10.6

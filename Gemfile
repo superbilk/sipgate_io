@@ -14,7 +14,7 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 group :development do
-  gem "guard", group: :development
+  gem "guard"
   gem 'guard-rails', require: false
   gem "guard-minitest", group: :development
   gem 'guard-bundler', require: false
