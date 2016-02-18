@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    sipgate_io (0.3.3)
-      actionpack (~> 4.2, >= 4.2.5.1)
-      activemodel (~> 4.2, >= 4.2.5.1)
+    sipgate_io (0.3.4)
+      actionpack (>= 4.2, <= 5.1)
+      activemodel (>= 4.2, <= 5.1)
 
 GEM
   remote: https://rubygems.org/
@@ -152,7 +152,7 @@ DEPENDENCIES
   guard-bundler
   guard-minitest
   guard-rails
-  rails (~> 4.2, >= 4.2.5.1)
+  rails (>= 4.2, <= 5.1)
   sipgate_io!
   sqlite3 (~> 1.3)
 
